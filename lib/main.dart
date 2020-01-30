@@ -32,26 +32,80 @@ class _AnotherHomeState extends State<AnotherHome> {
   initState() {
     super.initState();
   }
-  
-  showAlertDialog(BuildContext context) {
+  showConfirmedDialog(BuildContext context) {
+
+    Widget okButton = FlatButton(
+      child: Text("Okay"),
+      onPressed:  () {
+        Navigator.pop(context);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Icon(
+        Icons.done, 
+        color: Colors.orange, 
+        size: MediaQuery.of(context).size.width * 0.25,
+      ),
+      content: Text(
+        "Payment Successful",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: MediaQuery.of(context).size.width * 0.05,
+          fontWeight: FontWeight.bold
+        ),
+      ),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+  showPaymentDialog(BuildContext context) {
 
     // set up the buttons
     Widget cancelButton = FlatButton(
       child: Text("Cancel"),
       onPressed:  () {Navigator.pop(context);},
     );
-    Widget continueButton = FlatButton(
+    Widget confirmButton = FlatButton(
       child: Text("Confirm"),
-      onPressed:  () {Navigator.pop(context);},
+      onPressed:  () {
+        setState(() {
+          addedItems.clear();
+          totalAmount = 0;
+        });
+        Navigator.pop(context);
+        showConfirmedDialog(context);
+      },
     );
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Confirm Payment"),
-      content: Text("Subtotal: $totalAmount"),
+      title: Text(
+        "Confirm Payment?",
+        style: TextStyle(
+          fontSize: MediaQuery.of(context).size.width * 0.065,
+          fontWeight: FontWeight.bold
+        ),
+      ),
+      content: Text(
+        "Subtotal: $totalAmount",
+        style: TextStyle(
+          fontSize: MediaQuery.of(context).size.width * 0.05,
+        ),
+      ),
       actions: [
         cancelButton,
-        continueButton,
+        confirmButton,
       ],
     );
 
@@ -68,7 +122,8 @@ class _AnotherHomeState extends State<AnotherHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Easy Shop"),
+        title: Text("Easy Shop", style: TextStyle(color: Colors.white),),
+        centerTitle: true,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
@@ -124,22 +179,30 @@ class _AnotherHomeState extends State<AnotherHome> {
             Row(
               children: <Widget>[
                 Expanded(
-                  child: RaisedButton(
-                    onPressed: () {
-                      showAlertDialog(context);
-                    },
-                    child: Text(
-                      "Pay",
-                      style: TextStyle(color: Colors.white),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: RaisedButton(
+                      onPressed: () {
+                        showPaymentDialog(context);
+                      },
+                      child: Text(
+                        "Pay",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      elevation: 3.0,
+                      splashColor: Colors.orangeAccent,
+                      color: Colors.orange,
                     ),
-                    elevation: 3.0,
-                    splashColor: Colors.orangeAccent,
-                    color: Colors.orange,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text(totalAmount.toString(),),
+                  child: Text(
+                    "\$ ${totalAmount.toString()}",
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.06
+                    ),
+                  ),
                 )
               ],
             )
