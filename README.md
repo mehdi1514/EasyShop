@@ -4,4 +4,4 @@ Customers no longer have to stand in queues to pay because they can pay with thi
 
 ## App Demo
 
-
+![Easy Shop App Demo](Macintosh HD⁩/⁨Users⁩/⁨muntazir⁩/⁨Downloads/easyshop.gif⁩)
