@@ -5,5 +5,4 @@ Customers no longer have to stand in queues to pay because they can pay with thi
 ## App Demo
 
 
-<iframe width="560" height="315"src="https://www.youtube.com/watch?v=AwZZL3bB3C0" frameborder="0"allow="accelerometer;autoplay;encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+<iframe width="966" height="577" src="https://www.youtube.com/embed/AwZZL3bB3C0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
